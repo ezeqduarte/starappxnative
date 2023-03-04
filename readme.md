@@ -1,4 +1,4 @@
-# StarAppX React Test
+# StarAppX React Native Test
 
 Este proyecto es una solución de la prueba técnica sobre React Native de la agencia StarAppX.
 
@@ -19,7 +19,7 @@ Una vez iniciada la aplicación, abra un navegador web y visite `http://localhos
 
 ## Prueba Técnica
 
-La prueba técnica de React de la agencia StarAppX consta de lo siguiente:
+La prueba técnica de React Native de la agencia StarAppX consta de lo siguiente:
 
 1. Desarrollar un sitio en React native en el cual se muestre un DIV que incluya un texto aleatorio sobre un animal y abajo una imagen aleatoria del mismo.
 2. Consumir los datos de la API pública `https://some-random-api.ml/`.
