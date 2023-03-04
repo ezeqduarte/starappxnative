@@ -1,73 +1,70 @@
+import axios from "axios";
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
-import API from "../starappxreact/src/Api";
+import { StyleSheet, Text, View, Image, Button } from "react-native";
+import API from "./Api";
 
 export default function App() {
-  //Animal va a ser mi objeto que va a ir seteando cada vez que clickeo el boton
+  //Animal va a ser mi objeto que se va a ir seteando cada vez que haga la peticion a la api
   const [animal, setAnimal] = useState();
 
-  //utilizando axios realizo la peticion a la API y con lo que me responde, guardo en la variable para poder utilizarla. Lo realizo en una funcion asincrona ya que las peticiones se manejan mediante promesas.
+  //utilizando axios realizo la peticion y con la respuesta, guardo los datos en la variable para poder utilizarla. Lo realizo en una funcion asincrona ya que las peticiones se manejan mediante promesas.
 
   async function peticion() {
     const res = await axios.get(`${API}`);
-    /* console.log(res.data); */
     setAnimal(res.data);
   }
 
-  //Ejecuto la peticion dentro de un useEffect para poder controlar la peticion
-  useEffect(() => {
-    peticion();
-  }, []);
-
   return (
-    <View style={styles.app}>
+    <View style={styles.App}>
       <View style={styles.divInformation}>
-        <Image style={styles.image} source={animal?.image} />
-        <Text style={styles.text}>{animal?.fact}</Text>
+        <Image
+          style={styles.image}
+          source={{
+            uri: `${animal?.image}`,
+          }}
+        />
+        <Text style={styles.textInformation}>{animal?.fact}</Text>
         <Button
+          title="VIEW MORE"
           style={styles.button}
-          onPress={peticion()}
-          title="NEXT"
-        ></Button>
+          color="#rgb(225, 129, 129)"
+          onPress={() => {
+            peticion();
+          }}
+        />
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  app: {
+  App: {
     flex: 1,
     backgroundColor: "rgb(218, 218, 218)",
-    width: "100%",
-    height: "100%",
     alignItems: "center",
-    justifyContent: "center",
+    padding: 55,
   },
   divInformation: {
     flex: 1,
-    backgroundColor: "#white",
-    alignItems: "center",
+    width: 300,
+    height: 30,
+    backgroundColor: "#fff",
     justifyContent: "space-between",
-    width: "500px",
-    height: "500px",
-    borderRadius: "15px",
-    flexWrap: "wrap",
-    padding: "10px",
+    padding: 15,
+    borderRadius: 15,
   },
   image: {
-    height: "55%",
     width: "100%",
-    borderRadius: "7px",
+    height: "70%",
+    borderRadius: 12,
   },
-  text: {
-    fontWeight: "300",
+  textInformation: {
+    fontWeight: 400,
+    fontSize: 15,
   },
   button: {
-    borderRadius: "3px",
-    padding: "7px",
-    backgroundColor: "rgb(225, 129, 129)",
-    color: "white",
-    width: "100%",
+    width: 100,
+    borderRadius: 25,
   },
 });

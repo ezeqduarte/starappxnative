@@ -1,4 +1,4 @@
-const API = `https://some-random-api.ml/animal/panda`
+const API = `https://some-random-api.ml/animal/dog`
 
 
 export default API;
